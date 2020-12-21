@@ -1,0 +1,19 @@
+#!/bin/bash
+
+echo "Creating bucket ..."
+
+aws s3 mb s3://eller-09876
+
+echo "Creating lifecycle config ..."
+
+aws s3api put-bucket-lifecycle-configuration --bucket eller-09876 --lifecycle-configuration file://config.json
+
+echo "Creating data2 folder and file.txt ..."
+
+aws s3 cp file.txt s3://eller-09876/data2/file.txt
+
+echo "Creating data1 folder ..."
+
+aws s3api put-object --bucket eller-09876 --key data1
+
+echo "Done!"
